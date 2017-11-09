@@ -23,6 +23,7 @@ MediaID and PlayerID are available in your Account Dashboard. -->
 
 
 <div id="lbDiv"></div>
+<pre id="lbInfo" style="width: 90%;height: 200px;overflow: scroll; white-space: pre-wrap;"></pre>
 <!-- <script src="//content.jwplatform.com/libraries/5iL2r8dY.js"></script> -->
 <!-- <script src="//content.jwplatform.com/players/xJ7Wcodt-xDYBr4fw.js"></script> -->
 <script src="//content.jwplatform.com/libraries/Jq6HIbgz.js"></script>
@@ -35,9 +36,37 @@ MediaID and PlayerID are available in your Account Dashboard. -->
 		// file: "//content.jwplatform.com/videos/xJ7Wcodt-xDYBr4fw.mp4",
 		// image: "//content.jwplatform.com/thumbs/xJ7Wcodt-480.jpg",
 		playlist: 'https://cdn.jwplayer.com/v2/media/tkM1zvBq',
-		playbackRateControls: true
+		playbackRateControls: true,
+		playbackRates: [0.25, 0.75, 1, 1.25]
 	});
+
+	console.log(playerInstance.getEnvironment());
+
+	playerInstance.on('time', function(){
+		console.log(arguments)
+		// var info = '';
+		// for(var i = 0; i< arguments.length; i++){
+		// 	info += arguments[i] + '-';
+		// }
+		// displayInfo(info)
+	})
+
+	playerInstance.seek(5);
+
+	// setInterval(function(){
+	// 	var info = '';
+	// 	info += playerInstance.getState();
+	// 	info += ' ';
+	// 	info += playerInstance.getPosition();
+
+	// 	displayInfo(info);
+	// }, 100);
+
+	function displayInfo(info) {
+		document.getElementById('lbInfo').innerText = info;
+	}
 </script>
 
-<a href="javascript:playerInstance.play();">Toggle playback</a>
-<a href="javascript:alert('The volume of the player is: ' + jwplayer('myelement').getVolume());">Report volume</a>
+<a href="javascript:playerInstance.play();">Play</a>
+<a href="javascript:playerInstance.pause();">Pause</a>
+<a href="javascript:playerInstance.stop();">Stop</a>
